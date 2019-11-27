@@ -1,5 +1,6 @@
 package com.example.gastos
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.add_gasto.*
 
 class MainActivity : AppCompatActivity() {
@@ -16,10 +18,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
+        button.setOnClickListener {
+            val i = Intent(applicationContext, AddGastoActivity::class.java)
+            startActivity(i)
+        }
+
+        /*fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-        }
+        }*/
 
         /*tag.setOnClickListener {
             PopupMenu(context!!, tag).apply {
