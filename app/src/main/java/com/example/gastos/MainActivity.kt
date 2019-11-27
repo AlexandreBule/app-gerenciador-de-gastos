@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.add_gasto.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +20,17 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
+        /*tag.setOnClickListener {
+            PopupMenu(context!!, tag).apply {
+                menuInflater.inflate(R.menu.menu_in_transaction, menu)
+                setOnMenuItemClickListener { item ->
+                    editText.setText(item.title)
+                    true
+                }
+                show()
+            }
+        }*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
