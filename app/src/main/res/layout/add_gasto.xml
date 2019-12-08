@@ -177,6 +177,10 @@
 
     <!--  Add button  -->
     <com.google.android.material.button.MaterialButton
+        android:theme="@style/Theme.MaterialComponents.Light"
+        style="@style/Widget.MaterialComponents.Button"
+        android:backgroundTint="@color/colorGreen"
+        android:textColor="@color/colorWhite"
         android:id="@+id/btn_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -190,7 +194,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:textColor="@color/colorWhite"
-        android:background="@color/colorGreen"/>
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

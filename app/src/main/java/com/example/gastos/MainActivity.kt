@@ -1,5 +1,6 @@
 package com.example.gastos
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
@@ -22,6 +23,10 @@ class MainActivity : AppCompatActivity() {
                 db.GastoDAO().inserirGasto(gasto)
                 uiThread { finish() }
             }
+
+            // Open AddGastoActivity
+            val intent = Intent(applicationContext, AddGastoActivity::class.java)
+            startActivity(intent)
         }
     }
 
