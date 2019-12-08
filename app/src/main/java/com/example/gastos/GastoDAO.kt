@@ -15,7 +15,7 @@ interface GastoDAO {
     @Query("SELECT * FROM Gastos WHERE description LIKE :q")
     fun buscaGastoPelaDescricao(q : String) : Gasto
     @Query("SELECT * FROM Gastos WHERE month LIKE :q")
-    fun buscaGastoPeloMes(q : String) : Gasto
+    fun buscaGastoPeloMes(q : String) : ArrayList<Gasto>
     @Query("SELECT * FROM Gastos WHERE year LIKE :q")
     fun buscaGastoPeloAno(q : String) : Gasto
 }

@@ -6,6 +6,8 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -18,32 +20,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        button.setOnClickListener {
-            val i = Intent(applicationContext, AddGastoActivity::class.java)
-            startActivity(i)
-        }
-
-        /*fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
-
-        /*tag.setOnClickListener {
-            PopupMenu(context!!, tag).apply {
-                menuInflater.inflate(R.menu.menu_in_transaction, menu)
-                setOnMenuItemClickListener { item ->
-                    editText.setText(item.title)
-                    true
-                }
-                show()
+        floating_action_button.setOnClickListener {
+            val gasto = Gasto("Um gasto", 23.4, "Comida", "Recife", "2", "10", "2019", "asdasd")
+            doAsync {
+                val db = GastoDB.getDatabase(applicationContext)
+                db.GastoDAO().inserirGasto(gasto)
+                uiThread { finish() }
             }
-        }*/
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
