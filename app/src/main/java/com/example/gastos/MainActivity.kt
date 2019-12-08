@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             var lists = db.GastoDAO().buscaGastoPeloMes("12")
 
             uiThread {
+
                 if (lists.size != 0) {
                     listRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
                     listRecyclerView.adapter = GastoAdapter(lists, applicationContext)
@@ -39,12 +40,16 @@ class MainActivity : AppCompatActivity() {
 
 
         floating_action_button.setOnClickListener {
-            val gasto = Gasto("Um gasto NOVO 3", 50.0, "Entretenimento", "Recife", "2", "12", "2019", "asdasd")
-            doAsync {
-                val db = GastoDB.getDatabase(applicationContext)
-                db.GastoDAO().inserirGasto(gasto)
-//                uiThread { finish() }
-            }
+//             val gasto = Gasto("Um gasto NOVO 3", 50.0, "Entretenimento", "Recife", "2", "12", "2019", "asdasd")
+//             doAsync {
+//                 val db = GastoDB.getDatabase(applicationContext)
+//                 db.GastoDAO().inserirGasto(gasto)
+// //                uiThread { finish() }
+//             }
+
+            // Open AddGastoActivity
+            val intent = Intent(applicationContext, AddGastoActivity::class.java)
+            startActivity(intent)
 
             Log.e("Clique no botão", "Botão Clicado")
 //          startActivity(Intent(applicationContext,RecyclerViewActivity::class.java))

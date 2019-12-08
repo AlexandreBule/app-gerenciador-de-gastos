@@ -83,7 +83,7 @@ class AddGastoActivity : AppCompatActivity() {
             val gasto = Gasto(
                 description = description,
                 price = price,
-                tag = tag,
+                tagGasto = tag,
                 location = location,
                 day = date[0],
                 month = date[1],
@@ -115,8 +115,8 @@ class AddGastoActivity : AppCompatActivity() {
 
     fun getDate(text: String) : String {
         val c = Calendar.getInstance()
-        val today = c.get(Calendar.DATE).toString() + "/" + (c.get(Calendar.MONTH).toString() + 1) +  "/" +  c.get(Calendar.YEAR).toString()
-        val yesterday = (c.get(Calendar.DATE) - 1).toString() + "/" + (c.get(Calendar.MONTH).toString() + 1) +  "/" +  c.get(Calendar.YEAR).toString()
+        val today = c.get(Calendar.DATE).toString() + "/" + (c.get(Calendar.MONTH) + 1).toString() +  "/" +  c.get(Calendar.YEAR).toString()
+        val yesterday = (c.get(Calendar.DATE) - 1).toString() + "/" + (c.get(Calendar.MONTH) + 1).toString() +  "/" +  c.get(Calendar.YEAR).toString()
 
         if (text.contains("hoje")) {
             return today
