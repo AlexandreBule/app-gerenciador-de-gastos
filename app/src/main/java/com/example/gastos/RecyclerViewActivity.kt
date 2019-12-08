@@ -13,7 +13,7 @@ class RecyclerViewActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler_view)
 
-        var lists: ArrayList<Gasto> = []
+        var lists: Array<Gasto> = emptyArray<Gasto>()
 
         doAsync {
             val db = GastoDB.getDatabase(applicationContext)
@@ -22,6 +22,6 @@ class RecyclerViewActivity : Activity() {
         }
 
         listRecyclerView.layoutManager = LinearLayoutManager(this)
-        listRecyclerView.adapter = GastoAdapter(lists.toArray(), this)
+        listRecyclerView.adapter = GastoAdapter(lists, this)
     }
 }

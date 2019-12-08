@@ -1,17 +1,12 @@
 package com.example.gastos
 
-import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
-/*import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread*/
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.add_gasto.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,11 +17,11 @@ class MainActivity : AppCompatActivity() {
 
         floating_action_button.setOnClickListener {
             val gasto = Gasto("Um gasto", 23.4, "Comida", "Recife", "2", "10", "2019", "asdasd")
-            /*doAsync {
+            doAsync {
                 val db = GastoDB.getDatabase(applicationContext)
                 db.GastoDAO().inserirGasto(gasto)
                 uiThread { finish() }
-            }*/
+            }
         }
     }
 
