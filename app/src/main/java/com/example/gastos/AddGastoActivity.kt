@@ -6,7 +6,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.add_gasto.*
 import org.jetbrains.anko.doAsync
-import android.widget.Toast
+import java.util.*
+
 
 class AddGastoActivity : AppCompatActivity() {
 
@@ -17,8 +18,8 @@ class AddGastoActivity : AppCompatActivity() {
         description.setOnFocusChangeListener {_, hasFocus ->
             val text = description.getText().toString()
             if (!hasFocus) {
-                val tagFromText = getTag(text)
-                tag.setText(tagFromText)
+                tag.setText(getTag(text))
+                date.setText(getDate(text))
             }
         }
 
@@ -54,11 +55,24 @@ class AddGastoActivity : AppCompatActivity() {
         }
     }
 
-    fun getTag(text: String): String {
+    fun getTag(text: String) : String {
         val tag = text.substringAfter('#').split(' ')
-        print(text)
         if (tag.size > 0) {
             return tag[0]
+        } else {
+            return ""
+        }
+    }
+
+    fun getDate(text: String) : String {
+        val c = Calendar.getInstance()
+        val today = c.get(Calendar.DATE).toString() + "/" + c.get(Calendar.MONTH).toString() +  "/" +  c.get(Calendar.YEAR).toString()
+        val yesterday = (c.get(Calendar.DATE) - 1).toString() + "/" + c.get(Calendar.MONTH).toString() +  "/" +  c.get(Calendar.YEAR).toString()
+
+        if (text.contains("hoje")) {
+            return today
+        } else if(text.contains("ontem")) {
+            return yesterday
         } else {
             return ""
         }
