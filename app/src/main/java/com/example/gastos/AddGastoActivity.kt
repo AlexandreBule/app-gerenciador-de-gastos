@@ -1,12 +1,16 @@
 package com.example.gastos
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.location.Geocoder
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -51,8 +55,28 @@ class AddGastoActivity : AppCompatActivity() {
         }
 
         camera.setOnClickListener {
-            Log.d("tag", "clicou")
             dispatchTakePictureIntent()
+        }
+
+        gallery.setOnClickListener {
+            // check runtime permission
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                    PackageManager.PERMISSION_DENIED){
+                    // permission denied
+                    val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE);
+                    // show popup to request runtime permission
+                    requestPermissions(permissions, PERMISSION_CODE);
+                }
+                else{
+                    // permission already granted
+                    pickImageFromGallery();
+                }
+            }
+            else{
+                // system OS is < Marshmallow
+                pickImageFromGallery();
+            }
         }
 
         btn_Add.setOnClickListener {
@@ -112,8 +136,34 @@ class AddGastoActivity : AppCompatActivity() {
         }
     }
 
-    val REQUEST_IMAGE_CAPTURE = 1
-    var GASTO_IMAGE_STRING = ""
+    private val REQUEST_IMAGE_CAPTURE = 1
+    private val IMAGE_PICK_CODE = 1000;
+    private val PERMISSION_CODE = 1001;
+    private var GASTO_IMAGE_STRING = ""
+
+    private fun pickImageFromGallery() {
+        //Intent to pick image
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    //handle requested permission result
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            PERMISSION_CODE -> {
+                if (grantResults.size >0 && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED){
+                    //permission from popup granted
+                    pickImageFromGallery()
+                }
+                else{
+                    //permission from popup denied
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
@@ -125,12 +175,16 @@ class AddGastoActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode:Int, resultCode:Int, data:Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            if (data != null) {
-                var imageBitmap = data.extras!!.get("data")
-                GASTO_IMAGE_STRING = imageBitmap.toString()
-                imageBitmap = imageBitmap as Bitmap
-                image.setImageBitmap(imageBitmap)
-            }
+            var imageBitmap = data?.extras!!.get("data")
+            GASTO_IMAGE_STRING = imageBitmap.toString()
+            imageBitmap = imageBitmap as Bitmap
+            camera.setImageBitmap(imageBitmap)
+        }
+
+        if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE){
+            GASTO_IMAGE_STRING = data?.data.toString()
+            Log.d("URI", GASTO_IMAGE_STRING)
+            gallery.setImageURI(data?.data)
         }
     }
 }
