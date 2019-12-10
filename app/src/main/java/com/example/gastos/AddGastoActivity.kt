@@ -1,15 +1,18 @@
 package com.example.gastos
 
-import android.app.PendingIntent.getActivity
+import android.Manifest
 import android.content.Intent
-import android.location.Address
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.location.Geocoder
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
-import android.os.Parcelable
-import android.provider.ContactsContract.Directory.PACKAGE_NAME
+import android.provider.MediaStore
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.add_gasto.*
@@ -21,54 +24,67 @@ class AddGastoActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    private val REQUEST_IMAGE_CAPTURE = 1
+    private val IMAGE_PICK_CODE = 1000;
+    private val PERMISSION_CODE = 1001;
+    
+    private var GASTO_IMAGE_STRING = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_gasto)
 
+        // Ask for permissions
+        val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        ActivityCompat.requestPermissions(this, permissions,0)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
+        // Get location address
         fusedLocationClient.lastLocation
-            .addOnSuccessListener { local : Location? ->
-                Log.d("HERE", "HEERE")
-
-                val MyLat = local!!.getLatitude()
-                val MyLong = local!!.getLongitude()
-                Log.d("local", MyLat.toString())
-
-                val geocoder = Geocoder(this, Locale.getDefault())
-                var addresses: List<Address> = emptyList()
-                addresses = geocoder.getFromLocation(
-                    MyLat,
-                    MyLong,
-                    // In this sample, we get just a single address.
-                    1)
-
-                val cityName = addresses[0].getAddressLine(0)
-                val stateName = addresses[0].getAddressLine(1)
-                val countryName = addresses[0].getAddressLine(2)
-                Log.d("HEAAAAAAAAAAAAAAAAAARE", cityName)
-                location.setText(cityName)
+            .addOnSuccessListener { l : Location? ->
+                if (l != null) {
+                    val latitude = l.getLatitude()
+                    val longitude = l.getLongitude()
+                    val geocoder = Geocoder(this, Locale.getDefault())
+                    val addressesList = geocoder.getFromLocation(
+                        latitude,
+                        longitude,
+                        1)
+                    val address = addressesList[0].getAddressLine(0)
+                    location.setText(address)
+                }
             }
 
+        // When leaves description input, some other field may be filled
         description.setOnFocusChangeListener {_, hasFocus ->
             val text = description.getText().toString()
             if (!hasFocus) {
                 tag.setText(getTag(text))
                 date.setText(getDate(text))
+            }
+        }
 
-            /*    val local = intent.getParcelableExtra("${PACKAGE_NAME}.LOCATION_DATA_EXTRA") as Parcelable
-                val geocoder = Geocoder(this, Locale.getDefault())
-                var addresses: List<Address> = emptyList()
-                addresses = geocoder.getFromLocation(
-                    local.latitude,
-                    local.longitude,
-                    // In this sample, we get just a single address.
-                    1)
+        camera.setOnClickListener {
+            dispatchTakePictureIntent()
+        }
 
-                val cityName = addresses[0].getAddressLine(0)
-                val stateName = addresses[0].getAddressLine(1)
-                val countryName = addresses[0].getAddressLine(2)*/
+        gallery.setOnClickListener {
+            // check runtime permission
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                    PackageManager.PERMISSION_DENIED){
+                    // permission denied
+                    val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE);
+                    // show popup to request runtime permission
+                    requestPermissions(permissions, PERMISSION_CODE);
+                }
+                else{
+                    // permission already granted
+                    pickImageFromGallery();
+                }
+            } else{
+                // system OS is < Marshmallow
+                pickImageFromGallery();
             }
         }
 
@@ -88,14 +104,14 @@ class AddGastoActivity : AppCompatActivity() {
                 day = date[0],
                 month = date[1],
                 year = date[2],
-                image = ""
+                image = GASTO_IMAGE_STRING
             )
 
             doAsync {
                 val db = GastoDB.getDatabase(applicationContext)
                 db.GastoDAO().inserirGasto(gasto)
-                /*val g = db.GastoDAO().buscaGastoPelaDescricao("gasto 2")
-                Log.e("TAG", g.toString())*/
+                val g = db.GastoDAO().buscaGastoPelaDescricao("gasto 2")
+                Log.e("TAG", g.image)
             }
 
             // Go back to MainActivity
@@ -105,9 +121,11 @@ class AddGastoActivity : AppCompatActivity() {
     }
 
     fun getTag(text: String) : String {
-        val tag = text.substringAfter('#').split(' ')
-        if (tag.size > 1) {
-            return tag[0]
+        val regex = "#\\w+".toRegex()
+        val match = regex.find(text)
+        if (match != null) {
+            val aux = match.value.split('#')
+            return aux[1]
         } else {
             return ""
         }
@@ -124,6 +142,53 @@ class AddGastoActivity : AppCompatActivity() {
             return yesterday
         } else {
             return ""
+        }
+    }
+
+    private fun pickImageFromGallery() {
+        //Intent to pick image
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    //handle requested permission result
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            PERMISSION_CODE -> {
+                if (grantResults.size >0 && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED){
+                    //permission from popup granted
+                    pickImageFromGallery()
+                }
+                else{
+                    //permission from popup denied
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun dispatchTakePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode:Int, resultCode:Int, data:Intent?) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            var imageBitmap = data?.extras!!.get("data")
+            GASTO_IMAGE_STRING = imageBitmap.toString()
+            imageBitmap = imageBitmap as Bitmap
+            camera.setImageBitmap(imageBitmap)
+        }
+
+        if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE){
+            GASTO_IMAGE_STRING = data?.data.toString()
+            Log.d("URI", GASTO_IMAGE_STRING)
+            gallery.setImageURI(data?.data)
         }
     }
 }
