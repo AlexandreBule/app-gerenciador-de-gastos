@@ -1,14 +1,9 @@
 package com.example.gastos
 
-import android.app.PendingIntent.getActivity
 import android.content.Intent
-import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
-import android.os.Parcelable
-import android.provider.ContactsContract.Directory.PACKAGE_NAME
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -25,50 +20,30 @@ class AddGastoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_gasto)
 
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        // Get location address
         fusedLocationClient.lastLocation
-            .addOnSuccessListener { local : Location? ->
-                Log.d("HERE", "HEERE")
-
-                val MyLat = local!!.getLatitude()
-                val MyLong = local!!.getLongitude()
-                Log.d("local", MyLat.toString())
-
-                val geocoder = Geocoder(this, Locale.getDefault())
-                var addresses: List<Address> = emptyList()
-                addresses = geocoder.getFromLocation(
-                    MyLat,
-                    MyLong,
-                    // In this sample, we get just a single address.
-                    1)
-
-                val cityName = addresses[0].getAddressLine(0)
-                val stateName = addresses[0].getAddressLine(1)
-                val countryName = addresses[0].getAddressLine(2)
-                Log.d("HEAAAAAAAAAAAAAAAAAARE", cityName)
-                location.setText(cityName)
+            .addOnSuccessListener { l : Location? ->
+                if (l != null) {
+                    val latitude = l.getLatitude()
+                    val longitude = l.getLongitude()
+                    val geocoder = Geocoder(this, Locale.getDefault())
+                    val addressesList = geocoder.getFromLocation(
+                        latitude,
+                        longitude,
+                        1)
+                    val address = addressesList[0].getAddressLine(0)
+                    location.setText(address)
+                }
             }
 
+        // When leaves description input, some other field may be filled
         description.setOnFocusChangeListener {_, hasFocus ->
             val text = description.getText().toString()
             if (!hasFocus) {
                 tag.setText(getTag(text))
                 date.setText(getDate(text))
-
-            /*    val local = intent.getParcelableExtra("${PACKAGE_NAME}.LOCATION_DATA_EXTRA") as Parcelable
-                val geocoder = Geocoder(this, Locale.getDefault())
-                var addresses: List<Address> = emptyList()
-                addresses = geocoder.getFromLocation(
-                    local.latitude,
-                    local.longitude,
-                    // In this sample, we get just a single address.
-                    1)
-
-                val cityName = addresses[0].getAddressLine(0)
-                val stateName = addresses[0].getAddressLine(1)
-                val countryName = addresses[0].getAddressLine(2)*/
             }
         }
 
@@ -105,9 +80,11 @@ class AddGastoActivity : AppCompatActivity() {
     }
 
     fun getTag(text: String) : String {
-        val tag = text.substringAfter('#').split(' ')
-        if (tag.size > 1) {
-            return tag[0]
+        val regex = "#\\w+".toRegex()
+        val match = regex.find(text)
+        if (match != null) {
+            val aux = match.value.split('#')
+            return aux[1]
         } else {
             return ""
         }
