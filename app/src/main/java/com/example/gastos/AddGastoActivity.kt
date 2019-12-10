@@ -1,9 +1,12 @@
 package com.example.gastos
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -47,6 +50,11 @@ class AddGastoActivity : AppCompatActivity() {
             }
         }
 
+        camera.setOnClickListener {
+            Log.d("tag", "clicou")
+            dispatchTakePictureIntent()
+        }
+
         btn_Add.setOnClickListener {
             // Get values from inputs
             val description = description.getText().toString()
@@ -63,14 +71,14 @@ class AddGastoActivity : AppCompatActivity() {
                 day = date[0],
                 month = date[1],
                 year = date[2],
-                image = ""
+                image = GASTO_IMAGE_STRING
             )
 
             doAsync {
                 val db = GastoDB.getDatabase(applicationContext)
                 db.GastoDAO().inserirGasto(gasto)
-                /*val g = db.GastoDAO().buscaGastoPelaDescricao("gasto 2")
-                Log.e("TAG", g.toString())*/
+                val g = db.GastoDAO().buscaGastoPelaDescricao("gasto 2")
+                Log.e("TAG", g.image)
             }
 
             // Go back to MainActivity
@@ -101,6 +109,28 @@ class AddGastoActivity : AppCompatActivity() {
             return yesterday
         } else {
             return ""
+        }
+    }
+
+    val REQUEST_IMAGE_CAPTURE = 1
+    var GASTO_IMAGE_STRING = ""
+
+    private fun dispatchTakePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode:Int, resultCode:Int, data:Intent?) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            if (data != null) {
+                var imageBitmap = data.extras!!.get("data")
+                GASTO_IMAGE_STRING = imageBitmap.toString()
+                imageBitmap = imageBitmap as Bitmap
+                image.setImageBitmap(imageBitmap)
+            }
         }
     }
 }
