@@ -12,6 +12,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.add_gasto.*
@@ -23,12 +24,21 @@ class AddGastoActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    private val REQUEST_IMAGE_CAPTURE = 1
+    private val IMAGE_PICK_CODE = 1000;
+    private val PERMISSION_CODE = 1001;
+    
+    private var GASTO_IMAGE_STRING = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_gasto)
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        // Ask for permissions
+        val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        ActivityCompat.requestPermissions(this, permissions,0)
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         // Get location address
         fusedLocationClient.lastLocation
             .addOnSuccessListener { l : Location? ->
@@ -72,8 +82,7 @@ class AddGastoActivity : AppCompatActivity() {
                     // permission already granted
                     pickImageFromGallery();
                 }
-            }
-            else{
+            } else{
                 // system OS is < Marshmallow
                 pickImageFromGallery();
             }
@@ -135,11 +144,6 @@ class AddGastoActivity : AppCompatActivity() {
             return ""
         }
     }
-
-    private val REQUEST_IMAGE_CAPTURE = 1
-    private val IMAGE_PICK_CODE = 1000;
-    private val PERMISSION_CODE = 1001;
-    private var GASTO_IMAGE_STRING = ""
 
     private fun pickImageFromGallery() {
         //Intent to pick image
