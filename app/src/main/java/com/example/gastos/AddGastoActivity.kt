@@ -223,14 +223,14 @@ class AddGastoActivity : AppCompatActivity() {
 
         try {
             val stream: OutputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 85, stream)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
             stream.flush()
             stream.close()
         } catch (e: IOException) {
             e.printStackTrace()
         }
 
-        Log.d("TESTE AFF", file.absolutePath.toString())
+        Log.d("FILE PATH", file.absolutePath.toString())
         // Return the saved image uri
         return Uri.parse(file.absolutePath)
     }
