@@ -24,7 +24,7 @@ Buscamos seguir a UI do Android Material Design.
 
 ![Buttons](https://i.imgur.com/JHL6EFm.png?1)
 
-## Descreva cada elemento da UI
+## Descrever elementos da UI
 Abaixo tem alguns exemplos de como fizemos isso em certos elementos da interface
 
 <!-- Título, pequena descrição, exemplo de código -->
