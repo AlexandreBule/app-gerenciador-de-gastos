@@ -19,10 +19,48 @@ Buscamos seguir a UI do Android Material Design.
 
 ![Inputs](https://i.imgur.com/XrYcJwJ.png)
 
-## Buttons
+### Buttons
 [Docs](https://material.io/components/buttons/)
 
 ![Buttons](https://i.imgur.com/JHL6EFm.png?1)
 
-## Use controles grandes e simples
+## Descreva cada elemento da UI
+Abaixo tem alguns exemplos de como fizemos isso em certos elementos da interface
+
 <!-- Título, pequena descrição, exemplo de código -->
+### Label
+Como tem efeito apenas decorativo, o valor da descrição é null. `android:contentDescription="@null"`
+
+```
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/title"
+        ...
+        android:contentDescription="@null"
+        >
+
+        <View
+            android:id="@+id/bar"
+            ...
+            android:contentDescription="@null"
+            />
+
+        <TextView
+            android:id="@+id/textView"
+            ...
+            android:contentDescription="@null"
+            />
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+### Submit button
+Como esse elemento está vinculado a uma ação, é importante ter uma descrição atrelada. `android:contentDescription="Adicionar gasto"`
+
+```
+<com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_Add"
+        ...
+        android:contentDescription="Adicionar gasto"
+        />
+```
