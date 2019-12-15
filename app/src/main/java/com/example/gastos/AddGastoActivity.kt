@@ -110,6 +110,7 @@ class AddGastoActivity : AppCompatActivity() {
             }
 
             val gasto = Gasto(
+                gastoId = 0,
                 description = description,
                 price = Math.round(price * 100) / 100.0,
                 tagGasto = tag,
@@ -124,9 +125,9 @@ class AddGastoActivity : AppCompatActivity() {
             doAsync {
                 val db = GastoDB.getDatabase(applicationContext)
                 db.GastoDAO().inserirGasto(gasto)
-                val g = db.GastoDAO().buscaGastoPelaDescricao("gasto 2")
-                Log.e("TAG", g.image)
             }
+
+            Toast.makeText(applicationContext, "Gasto adicionado!", Toast.LENGTH_SHORT).show()
 
             // Go back to MainActivity
             val intent = Intent(applicationContext, MainActivity::class.java)
