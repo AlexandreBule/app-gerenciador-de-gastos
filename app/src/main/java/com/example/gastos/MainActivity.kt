@@ -2,6 +2,7 @@ package com.example.gastos
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import org.jetbrains.anko.doAsync
@@ -11,7 +12,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.floating_action_button
 import kotlinx.android.synthetic.main.activity_main.listRecyclerView
+import kotlinx.android.synthetic.main.add_gasto.view.*
 import java.util.*
+import kotlin.collections.ArrayList
+import android.R.attr.width
+import android.R.attr.button
+import android.widget.LinearLayout
+import androidx.core.app.ComponentActivity
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,39 +32,106 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        // get device dimensions
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val height = displayMetrics.heightPixels
+        // set coordinator_floating_button min height
+        coordinator_floating_button.setMinimumHeight(height - 100)
+
+
+        val list1: ArrayList<Gasto> = ArrayList()
+        val list2: ArrayList<Gasto> = ArrayList()
+        val list3: ArrayList<Gasto> = ArrayList()
+        val list4: ArrayList<Gasto> = ArrayList()
+
+        var total: Double = 0.0
+        var total1: Double = 0.0
+        var total2: Double = 0.0
+        var total3: Double = 0.0
+        var total4: Double = 0.0
+
         val c = Calendar.getInstance()
         val month = (c.get(Calendar.MONTH) + 1).toString()
-        Log.e("MÊSSS", month)
+        val year = (c.get(Calendar.YEAR)).toString()
+        when(month) {
+            "1" -> monthTitle.text = "Janeiro"
+            "2" -> monthTitle.text = "Fevereiro"
+            "3" -> monthTitle.text = "Março"
+            "4" -> monthTitle.text = "Abril"
+            "5" -> monthTitle.text = "Maio"
+            "6" -> monthTitle.text = "Junho"
+            "7" -> monthTitle.text = "Julho"
+            "8" -> monthTitle.text = "Agosto"
+            "9" -> monthTitle.text = "Setembro"
+            "10" -> monthTitle.text = "Outubro"
+            "11" -> monthTitle.text = "Novembro"
+            "12" -> monthTitle.text = "Dezembro"
+        }
 
         doAsync {
             val db = GastoDB.getDatabase(applicationContext)
-            var lists = db.GastoDAO().buscaGastoPeloMes("12")
+            var lists = db.GastoDAO().buscaGastoPeloAnoMes(month, year)
+
+            for (i in 0..lists.size - 1) {
+                total = Math.round((total + lists[i].price) * 100) / 100.0
+                when(lists[i].week) {
+                    "1" -> {
+                        list1.add(lists[i])
+                        total1 = Math.round((total1 + lists[i].price) * 100) / 100.0
+                    }
+                    "2" -> {
+                        list2.add(lists[i])
+                        total2 = Math.round((total2 + lists[i].price) * 100) / 100.0
+                    }
+                    "3" -> {
+                        list3.add(lists[i])
+                        total3 = Math.round((total3 + lists[i].price) * 100) / 100.0
+                    }
+                    "4" -> {
+                        list4.add(lists[i])
+                        total4 = Math.round((total4 + lists[i].price) * 100) / 100.0
+                    }
+                }
+            }
 
             uiThread {
 
-                if (lists.size != 0) {
+                val auxTotal = "R$ $total"
+                totalMonth.text = auxTotal
+
+                if (list4.size != 0) {
+                    val aux = "R$ $total4"
+                    totalWeek4.text = aux
                     listRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
-                    listRecyclerView.adapter = GastoAdapter(lists, applicationContext)
-                    Log.e("Descrição do Gasto", lists[0].description)
+                    listRecyclerView.adapter = GastoAdapter(list4.toList(), applicationContext)
+                }
+                if (list3.size != 0) {
+                    val aux = "R$ $total3"
+                    totalWeek3.text = aux
+                    listRecyclerView2.layoutManager = LinearLayoutManager(applicationContext)
+                    listRecyclerView2.adapter = GastoAdapter(list3.toList(), applicationContext)
+                }
+                if (list2.size != 0) {
+                    val aux = "R$ $total2"
+                    totalWeek2.text = aux
+                    listRecyclerView3.layoutManager = LinearLayoutManager(applicationContext)
+                    listRecyclerView3.adapter = GastoAdapter(list2.toList(), applicationContext)
+                }
+                if (list1.size != 0) {
+                    val aux = "R$ $total1"
+                    totalWeek1.text = aux
+                    listRecyclerView4.layoutManager = LinearLayoutManager(applicationContext)
+                    listRecyclerView4.adapter = GastoAdapter(list1.toList(), applicationContext)
                 }
             }
         }
 
 
         floating_action_button.setOnClickListener {
-//             val gasto = Gasto("Um gasto NOVO 3", 50.0, "Entretenimento", "Recife", "2", "12", "2019", "asdasd")
-//             doAsync {
-//                 val db = GastoDB.getDatabase(applicationContext)
-//                 db.GastoDAO().inserirGasto(gasto)
-// //                uiThread { finish() }
-//             }
-
             // Open AddGastoActivity
             val intent = Intent(applicationContext, AddGastoActivity::class.java)
             startActivity(intent)
-
-            Log.e("Clique no botão", "Botão Clicado")
-//          startActivity(Intent(applicationContext,RecyclerViewActivity::class.java))
         }
     }
 

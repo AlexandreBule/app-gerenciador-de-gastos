@@ -16,6 +16,10 @@ interface GastoDAO {
     fun buscaGastoPelaDescricao(q : String) : Gasto
     @Query("SELECT * FROM Gastos WHERE month LIKE :q")
     fun buscaGastoPeloMes(q : String) : List<Gasto>
+    @Query("SELECT * FROM Gastos WHERE month LIKE :q " + "AND year LIKE :y")
+    fun buscaGastoPeloAnoMes(q : String, y : String) : List<Gasto>
     @Query("SELECT * FROM Gastos WHERE year LIKE :q")
     fun buscaGastoPeloAno(q : String) : Gasto
+    @Query("DELETE FROM Gastos WHERE gastoId = :id")
+    fun deleteById(id: Int)
 }

@@ -115,14 +115,29 @@ class AddGastoActivity : AppCompatActivity() {
                 ""
             ) else date.getText().toString().split('/')
 
+            //Add spent week
+            var week: String
+            var day = date[0].toInt()
+            if (day <= 7) {
+                week = "1"
+            } else if (day <= 14) {
+                week = "2"
+            } else if (day <=21) {
+                week = "3"
+            } else {
+                week = "4"
+            }
+
             val gasto = Gasto(
+                gastoId = 0,
                 description = description,
-                price = price,
+                price = Math.round(price * 100) / 100.0,
                 tagGasto = tag,
                 location = location,
                 day = date[0],
                 month = date[1],
                 year = date[2],
+                week = week,
                 image = GASTO_IMAGE_STRING
             )
 
@@ -130,6 +145,8 @@ class AddGastoActivity : AppCompatActivity() {
                 val db = GastoDB.getDatabase(applicationContext)
                 db.GastoDAO().inserirGasto(gasto)
             }
+
+            Toast.makeText(applicationContext, "Gasto adicionado!", Toast.LENGTH_SHORT).show()
 
             // Go back to MainActivity
             val intent = Intent(applicationContext, MainActivity::class.java)
