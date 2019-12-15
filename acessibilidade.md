@@ -2,7 +2,7 @@
 No quesito Acessibilidade, tentamos seguir algumas boas práticas citadas no [Guia de Acessibilidade do Android Developers](https://developer.android.com/guide/topics/ui/accessibility/apps).
 
 ## Material Design
-Buscamos seguir a UI do Android Material Design
+Buscamos seguir a UI do Android Material Design.
 
 ### Top navbar
 [Docs](https://material.io/components/app-bars-top/)
@@ -19,6 +19,10 @@ Buscamos seguir a UI do Android Material Design
 
 ![Inputs](https://i.imgur.com/XrYcJwJ.png)
 
+## Buttons
+[Docs](https://material.io/components/buttons/)
+
+![Buttons](https://i.imgur.com/JHL6EFm.png?1)
 
 ## Use controles grandes e simples
 <!-- Título, pequena descrição, exemplo de código -->
