@@ -2,6 +2,7 @@ package com.example.gastos
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import org.jetbrains.anko.doAsync
@@ -14,6 +15,15 @@ import kotlinx.android.synthetic.main.activity_main.listRecyclerView
 import kotlinx.android.synthetic.main.add_gasto.view.*
 import java.util.*
 import kotlin.collections.ArrayList
+import android.R.attr.width
+import android.R.attr.button
+import android.widget.LinearLayout
+import androidx.core.app.ComponentActivity
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +31,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        // get device dimensions
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val height = displayMetrics.heightPixels
+        // set coordinator_floating_button min height
+        coordinator_floating_button.setMinimumHeight(height - 100)
+
 
         val list1: ArrayList<Gasto> = ArrayList()
         val list2: ArrayList<Gasto> = ArrayList()

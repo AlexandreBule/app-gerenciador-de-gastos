@@ -6,10 +6,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <!--  Camera -->
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <!--  Storage  -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +21,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RecyclerViewActivity"></activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@layout/add_gasto" />
+        </provider>
+
+        <activity android:name=".GastoDetailActivity"></activity>
+        <activity android:name=".RecyclerViewActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -33,7 +48,7 @@
 
         <service
             android:name=".AddGastoActivity"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>

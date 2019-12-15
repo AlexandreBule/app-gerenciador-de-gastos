@@ -1,6 +1,7 @@
 package com.example.gastos
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,20 +26,34 @@ class GastoAdapter (private val gastos: List<Gasto>, private val c : Context) : 
         holder.price.text = g.price.toString()
         holder.tag.text = g.tagGasto
         Log.e("TAG", "Entrando no Adapter")
+
+        holder.price.setOnClickListener{
+            val date = "${g.day}/${g.month}/${g.year}"
+            val intent = Intent(c, GastoDetailActivity::class.java)
+            intent.putExtra("tagGasto",g.tagGasto)
+            intent.putExtra("description",g.description)
+            intent.putExtra("price",g.price.toString())
+            intent.putExtra("location",g.location)
+            intent.putExtra("date",date)
+            intent.putExtra("id",g.gastoId.toString())
+            c.startActivity(intent)
+        }
+
+        holder.tag.setOnClickListener{
+            val date = "${g.day}/${g.month}/${g.year}"
+            val intent = Intent(c, GastoDetailActivity::class.java)
+            intent.putExtra("tagGasto",g.tagGasto)
+            intent.putExtra("description",g.description)
+            intent.putExtra("price",g.price.toString())
+            intent.putExtra("location",g.location)
+            intent.putExtra("date",date)
+            intent.putExtra("id",g.gastoId.toString())
+            c.startActivity(intent)
+        }
     }
 
     class ViewHolder (item : View) : RecyclerView.ViewHolder(item) {
         val price = item.price
         var tag = item.tagGasto
-
-//        init {
-//            Log.e("TAG3",item.toString())
-//            item.setOnClickListener(this)
-//        }
-//
-//        override fun onClick(v: View) {
-//            val position = adapterPosition
-//            Toast.makeText(v.context, "Clicou no item da posição: $position", Toast.LENGTH_SHORT).show()
-//        }
     }
 }
