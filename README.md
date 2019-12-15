@@ -4,16 +4,21 @@
 ## Introdução
 O objetivo deste documento é apresentar a proposta e especificação técnica do projeto de desenvolvimento de um aplicativo Android para a disciplina IF710 - Programação para Dispositivos Móveis com Android, ofertada no CIn, UFPE, no semestre 2019.2.
 
+### Demo
+[APK](drive)
+
+### Para saber mais detalhes sobre:
+| Relatório |
+| --- |
+| [CPU & Performance](cpu.md) |
+| [Consumo de Rede](bandwidth.md) |
+| [Memória](memoria.md) | 
+| [Bateria](bateria.md) | 
+| [Acessibilidade](acessibilidade.md) | 
+
 ### Equipe
 - [Pamella Bezerra](https://github.com/pamella/)
 - [Victor Aguiar](https://github.com/victoraguiarguedes)
-
-### Para saber mais detalhes sobre:
-- [CPU & Performance](cpu.md)
-- [Consumo de Rede](bandwidth.md)
-- [Memória](memoria.md)
-- [Bateria](bateria.md)
-- [Acessibilidade](acessibilidade.md)
 
 ## Gerenciador de Gastos
 Já se foi o tempo em que o gerenciamento dos gastos pessoais era feito em um caderninho. Nos dias de hoje, os aplicativos de celular são capazes de suprir necessidades de organização, inclusive a financeira.
