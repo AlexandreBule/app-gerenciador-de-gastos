@@ -7,18 +7,19 @@ O objetivo deste documento é apresentar a proposta e especificação técnica d
 ### Demo
 [APK](drive)
 
-### Para saber mais detalhes sobre:
-| Relatório |
+### Equipe
+- [Pamella Bezerra](https://github.com/pamella/)
+- [Victor Aguiar](https://github.com/victoraguiarguedes)
+
+### Outros conteúdos
+| Tópico |
 | --- |
+| [Mockup com fluxo de uso](https://xd.adobe.com/view/3eb7e8a4-b05f-402e-7956-637834c0ecc8-4886/) |
 | [CPU & Performance](cpu.md) |
 | [Consumo de Rede](bandwidth.md) |
 | [Memória](memoria.md) | 
 | [Bateria](bateria.md) | 
 | [Acessibilidade](acessibilidade.md) | 
-
-### Equipe
-- [Pamella Bezerra](https://github.com/pamella/)
-- [Victor Aguiar](https://github.com/victoraguiarguedes)
 
 ## Gerenciador de Gastos
 Já se foi o tempo em que o gerenciamento dos gastos pessoais era feito em um caderninho. Nos dias de hoje, os aplicativos de celular são capazes de suprir necessidades de organização, inclusive a financeira.
