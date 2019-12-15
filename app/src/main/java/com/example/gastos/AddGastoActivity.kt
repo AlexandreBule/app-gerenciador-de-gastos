@@ -96,14 +96,28 @@ class AddGastoActivity : AppCompatActivity() {
             val location = if (location.getText().toString().isNullOrEmpty()) "" else location.getText().toString()
             val date = if (date.getText().toString().isNullOrEmpty()) listOf<String>("", "", "")  else date.getText().toString().split('/')
 
+            //Add spent week
+            var week: String
+            var day = date[0].toInt()
+            if (day <= 7) {
+                week = "1"
+            } else if (day <= 14) {
+                week = "2"
+            } else if (day <=21) {
+                week = "3"
+            } else {
+                week = "4"
+            }
+
             val gasto = Gasto(
                 description = description,
-                price = price,
+                price = Math.round(price * 100) / 100.0,
                 tagGasto = tag,
                 location = location,
                 day = date[0],
                 month = date[1],
                 year = date[2],
+                week = week,
                 image = GASTO_IMAGE_STRING
             )
 
