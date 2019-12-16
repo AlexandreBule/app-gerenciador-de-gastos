@@ -223,24 +223,40 @@ class MainActivity : AppCompatActivity() {
                         totalWeek4.text = aux
                         listRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
                         listRecyclerView.adapter = GastoAdapter(list4.toList(), applicationContext)
+                    } else {
+                        totalWeek1.text = "R$ 0,00"
+                        listRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                        listRecyclerView.adapter = GastoAdapter(emptyList(), applicationContext)
                     }
                     if (list3.size != 0) {
                         val aux = "R$ $total3"
                         totalWeek3.text = aux
                         listRecyclerView2.layoutManager = LinearLayoutManager(applicationContext)
                         listRecyclerView2.adapter = GastoAdapter(list3.toList(), applicationContext)
+                    } else {
+                        totalWeek1.text = "R$ 0,00"
+                        listRecyclerView2.layoutManager = LinearLayoutManager(applicationContext)
+                        listRecyclerView2.adapter = GastoAdapter(emptyList(), applicationContext)
                     }
                     if (list2.size != 0) {
                         val aux = "R$ $total2"
                         totalWeek2.text = aux
                         listRecyclerView3.layoutManager = LinearLayoutManager(applicationContext)
                         listRecyclerView3.adapter = GastoAdapter(list2.toList(), applicationContext)
+                    } else {
+                        totalWeek1.text = "R$ 0,00"
+                        listRecyclerView3.layoutManager = LinearLayoutManager(applicationContext)
+                        listRecyclerView3.adapter = GastoAdapter(emptyList(), applicationContext)
                     }
                     if (list1.size != 0) {
                         val aux = "R$ $total1"
                         totalWeek1.text = aux
                         listRecyclerView4.layoutManager = LinearLayoutManager(applicationContext)
                         listRecyclerView4.adapter = GastoAdapter(list1.toList(), applicationContext)
+                    } else {
+                        totalWeek1.text = "R$ 0,00"
+                        listRecyclerView4.layoutManager = LinearLayoutManager(applicationContext)
+                        listRecyclerView4.adapter = GastoAdapter(emptyList(), applicationContext)
                     }
                 }
             }
@@ -332,24 +348,40 @@ class MainActivity : AppCompatActivity() {
                         totalWeek4.text = aux
                         listRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
                         listRecyclerView.adapter = GastoAdapter(list4.toList(), applicationContext)
+                    } else {
+                        totalWeek1.text = "R$ 0,00"
+                        listRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                        listRecyclerView.adapter = GastoAdapter(emptyList(), applicationContext)
                     }
                     if (list3.size != 0) {
                         val aux = "R$ $total3"
                         totalWeek3.text = aux
                         listRecyclerView2.layoutManager = LinearLayoutManager(applicationContext)
                         listRecyclerView2.adapter = GastoAdapter(list3.toList(), applicationContext)
+                    } else {
+                        totalWeek1.text = "R$ 0,00"
+                        listRecyclerView2.layoutManager = LinearLayoutManager(applicationContext)
+                        listRecyclerView2.adapter = GastoAdapter(emptyList(), applicationContext)
                     }
                     if (list2.size != 0) {
                         val aux = "R$ $total2"
                         totalWeek2.text = aux
                         listRecyclerView3.layoutManager = LinearLayoutManager(applicationContext)
                         listRecyclerView3.adapter = GastoAdapter(list2.toList(), applicationContext)
+                    } else {
+                        totalWeek1.text = "R$ 0,00"
+                        listRecyclerView3.layoutManager = LinearLayoutManager(applicationContext)
+                        listRecyclerView3.adapter = GastoAdapter(emptyList(), applicationContext)
                     }
                     if (list1.size != 0) {
                         val aux = "R$ $total1"
                         totalWeek1.text = aux
                         listRecyclerView4.layoutManager = LinearLayoutManager(applicationContext)
                         listRecyclerView4.adapter = GastoAdapter(list1.toList(), applicationContext)
+                    } else {
+                        totalWeek1.text = "R$ 0,00"
+                        listRecyclerView4.layoutManager = LinearLayoutManager(applicationContext)
+                        listRecyclerView4.adapter = GastoAdapter(emptyList(), applicationContext)
                     }
                 }
             }

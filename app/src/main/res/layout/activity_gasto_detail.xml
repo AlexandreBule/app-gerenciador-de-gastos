@@ -168,53 +168,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/constraintLayout"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="32dp"-->
-<!--        app:layout_constraintHorizontal_bias="0.086"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/dateWrapper">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/imageTextView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="24dp"-->
-<!--            android:text="Foto"-->
-<!--            android:textColor="@color/colorGray"-->
-<!--            android:textSize="18dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/camera"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            android:layout_marginLeft="22dp"-->
-<!--            app:layout_constraintLeft_toRightOf="@id/imageTextView"-->
-<!--            app:layout_constraintTop_toBottomOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:srcCompat="@android:drawable/ic_menu_camera" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/gallery"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            app:srcCompat="@android:drawable/ic_menu_gallery"-->
-<!--            android:layout_marginLeft="22dp"-->
-<!--            app:layout_constraintLeft_toRightOf="@id/camera"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            />-->
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
