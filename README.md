@@ -7,8 +7,8 @@ O objetivo deste documento é apresentar a proposta e especificação técnica d
 ### Demo
 | Artefato |
 | --- |
-| [APK](drive)|
-| [Vídeo](drive) |
+| [APK](https://drive.google.com/file/d/1eme1lVMHKq4IxBNe31nSSvh4gaVzrbjp/view?usp=sharing)|
+| [Vídeo](https://drive.google.com/file/d/176sU7yMD5p3ORPbMerwK_DEgsSnyB9Py/view?usp=sharing) |
 
 ### Outros conteúdos
 | Tópico |
