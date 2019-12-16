@@ -31,3 +31,20 @@ Percebe-se que, de modo geral, o uso da memória se mantém constante durante to
 - Deletar o gasto
 
 ![Deletar gasto](https://i.imgur.com/46mO0Pi.png?1)
+
+## Leak Canary
+**Memory Leak** é uma falha na liberação de objetos não utilizados da memória. É um erro de programação que faz com que um aplicativo mantenha uma referência a um objeto que não é mais necessário. Como resultado, a memória alocada para esse objeto não pode ser recuperada, levando a uma falha no OutOfMemoryError.
+
+**LeakCanary** é uma biblioteca de detecção de vazamento de memória para Android.
+
+Para adicionar ao projeto, basta adicionar no `build.gradle`:
+```
+dependencies {
+  // debugImplementation because LeakCanary should only run in debug builds.
+  debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
+}
+```
+
+Ao adicionarmos ao aplicativo, tivemos os resultados abaixo:
+![](https://i.imgur.com/UipdBAz.jpg)
+![](https://i.imgur.com/55a8rIi.jpg)
