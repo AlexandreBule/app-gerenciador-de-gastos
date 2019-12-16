@@ -23,6 +23,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@null"
         >
 
         <View
@@ -32,7 +33,9 @@
             android:background="@color/colorGreen"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@null"
+            />
 
         <TextView
             android:id="@+id/textView"
@@ -45,7 +48,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/bar"
             app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@null"
+            />
         />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -67,7 +72,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title">
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:contentDescription="Descrição do gasto"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/description"
@@ -92,7 +99,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionWrapper">
+        app:layout_constraintTop_toBottomOf="@+id/descriptionWrapper"
+        android:contentDescription="Valor do gasto"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/price"
@@ -115,7 +124,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priceWrapper"
-        android:hint="Tag">
+        android:hint="Tag"
+        android:contentDescription="Tag do gasto"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tag"
@@ -138,7 +149,9 @@
         android:textColor="@color/colorGray"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tagWrapper">
+        app:layout_constraintTop_toBottomOf="@+id/tagWrapper"
+        android:contentDescription="Local do gasto"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/location"
@@ -162,6 +175,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationWrapper"
+        android:contentDescription="Data do gasto"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -171,6 +185,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Image wrapper -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
@@ -179,7 +194,9 @@
         app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateWrapper">
+        app:layout_constraintTop_toBottomOf="@+id/dateWrapper"
+        android:contentDescription="@null"
+        >
 
         <TextView
             android:id="@+id/imageTextView"
@@ -192,7 +209,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@null"
+            />
 
         <ImageView
             android:id="@+id/camera"
@@ -203,7 +222,9 @@
             app:layout_constraintLeft_toRightOf="@id/imageTextView"
             app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
+            app:srcCompat="@android:drawable/ic_menu_camera"
+            android:contentDescription="Imagem vindo da câmera"
+            />
 
         <ImageView
             android:id="@+id/gallery"
@@ -214,6 +235,7 @@
             android:layout_marginLeft="22dp"
             app:layout_constraintLeft_toRightOf="@id/camera"
             app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="Imagem vindo da galeria"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -238,7 +260,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        android:contentDescription="Adicionar gasto"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

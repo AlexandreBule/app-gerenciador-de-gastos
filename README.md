@@ -4,6 +4,22 @@
 ## Introdução
 O objetivo deste documento é apresentar a proposta e especificação técnica do projeto de desenvolvimento de um aplicativo Android para a disciplina IF710 - Programação para Dispositivos Móveis com Android, ofertada no CIn, UFPE, no semestre 2019.2.
 
+### Demo
+| Artefato |
+| --- |
+| [APK](https://drive.google.com/file/d/1eme1lVMHKq4IxBNe31nSSvh4gaVzrbjp/view?usp=sharing)|
+| [Vídeo](https://drive.google.com/file/d/176sU7yMD5p3ORPbMerwK_DEgsSnyB9Py/view?usp=sharing) |
+
+### Outros conteúdos
+| Tópico |
+| --- |
+| [Mockup com fluxo de uso](https://xd.adobe.com/view/3eb7e8a4-b05f-402e-7956-637834c0ecc8-4886/) |
+| [CPU & Performance](cpu.md) |
+| [Consumo de Rede](bandwidth.md) |
+| [Memória](memoria.md) | 
+| [Bateria](bateria.md) | 
+| [Acessibilidade](acessibilidade.md) | 
+
 ### Equipe
 - [Pamella Bezerra](https://github.com/pamella/)
 - [Victor Aguiar](https://github.com/victoraguiarguedes)

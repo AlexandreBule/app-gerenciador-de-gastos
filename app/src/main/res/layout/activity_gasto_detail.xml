@@ -20,7 +20,9 @@
         app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@null"
+        >
 
         <View
             android:id="@+id/bar"
@@ -29,7 +31,8 @@
             android:background="@color/colorGreen"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@null" />
 
         <TextView
             android:id="@+id/tagGasto"
@@ -64,7 +67,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title">
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:contentDescription="Descrição do gasto">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/description"
@@ -89,7 +93,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionWrapper">
+        app:layout_constraintTop_toBottomOf="@+id/descriptionWrapper"
+        android:contentDescription="Valor do gasto">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/price"
@@ -112,7 +117,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priceWrapper"
-        android:hint="Tag">
+        android:hint="Tag"
+        android:contentDescription="Tag do gasto">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tag"
@@ -135,7 +141,8 @@
         android:textColor="@color/colorGray"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tagWrapper">
+        app:layout_constraintTop_toBottomOf="@+id/tagWrapper"
+        android:contentDescription="Local do gasto">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/location"
@@ -159,7 +166,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationWrapper"
-        >
+        android:contentDescription="Data do gasto" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/date"
@@ -195,7 +202,8 @@
             android:text="SALVAR"
             android:textColor="@color/colorWhite"
             android:textSize="20dp"
-            android:theme="@style/Theme.MaterialComponents.Light" />
+            android:theme="@style/Theme.MaterialComponents.Light"
+            android:contentDescription="Salvar gasto"/>
 
         <!--  Delete button  -->
         <com.google.android.material.button.MaterialButton
@@ -216,10 +224,10 @@
             android:text="DELETAR"
             android:textColor="@color/colorGreen"
             android:textSize="20dp"
-            android:theme="@style/Theme.MaterialComponents.Light" />
+            android:theme="@style/Theme.MaterialComponents.Light"
+            android:contentDescription="Deletar do gasto"/>
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
