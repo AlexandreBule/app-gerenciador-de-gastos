@@ -18,7 +18,7 @@ Percebe-se que o uso da CPU se mantém menor ao:
 - Preencher os inputs
 
 Porém os picos da CPU são notados ao:
-- Clicar no (+) para adicionar um novo gasto
+- Clicar no item na lista da tela inicial
 - Salvar o gasto
 
 ![Editar gasto](https://i.imgur.com/Ab8QXlv.png?1)
