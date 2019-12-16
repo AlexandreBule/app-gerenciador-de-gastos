@@ -22,3 +22,14 @@ Porém os picos da CPU são notados ao:
 - Salvar o gasto
 
 ![Editar gasto](https://i.imgur.com/Ab8QXlv.png?1)
+
+### Deletar gasto
+
+Percebe-se que o uso da CPU se mantém menor ao:
+- Scrollar a tela de detalhe do gasto até visualizar o botão de deletar
+
+Porém os picos da CPU são notados ao:
+- Clicar no item na lista da tela inicial
+- Deletar o gasto
+
+![Deletar gasto](https://i.imgur.com/3vANR8s.png?1)
