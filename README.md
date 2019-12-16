@@ -6,6 +6,7 @@ O objetivo deste documento é apresentar a proposta e especificação técnica d
 
 ### Demo
 [APK](drive)
+[Vídeo](drive)
 
 ### Equipe
 - [Pamella Bezerra](https://github.com/pamella/)
