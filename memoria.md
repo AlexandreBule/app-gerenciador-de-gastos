@@ -46,5 +46,7 @@ dependencies {
 ```
 
 Ao adicionarmos ao aplicativo, tivemos os resultados abaixo:
+
 ![](https://i.imgur.com/UipdBAz.jpg)
+
 ![](https://i.imgur.com/55a8rIi.jpg)
