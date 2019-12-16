@@ -61,28 +61,6 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/coordinator_floating_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floating_action_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:backgroundTint="@color/colorGreen"
-                app:srcCompat="@drawable/add"
-                android:contentDescription="Adicionar novo gasto"
-                />
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -107,6 +85,35 @@
                 android:text="Dezembro"
                 android:textColor="#2B2B2B"
                 android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/Previous"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_marginLeft="22dp"
+                    app:layout_constraintLeft_toRightOf="@id/imageTextView"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/back" />
+
+                <ImageView
+                    android:id="@+id/Next"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_marginLeft="28dp"
+                    app:layout_constraintLeft_toRightOf="@id/imageTextView"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/next" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -279,6 +286,26 @@
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout10" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/coordinator_floating_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floating_action_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:backgroundTint="@color/colorGreen"
+                app:srcCompat="@drawable/add" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
